@@ -1,0 +1,14 @@
+services:
+  miBaseDeDatos:
+    image: mysql:8
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: db_dds  # Esta variable crea la base de datos db_dds automáticamente
+    volumes:
+      - db_data:/var/lib/mysql  # Persistencia de datos
+      - ./init-db:/docker-entrypoint-initdb.d  # Directorio para scripts de inicialización
+volumes:
+  db_data:
