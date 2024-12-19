@@ -10,5 +10,10 @@ services:
     volumes:
       - db_data:/var/lib/mysql  # Persistencia de datos
       - ./init-db:/docker-entrypoint-initdb.d  # Directorio para scripts de inicialización
+      - .certs:/etc/mysql/certs #montar los certificados del servidor
+    command: >
+      --ssl-ca=/etc/mysql/certs/ca.pem
+      --ssl-cert=/etc/mysql/certs/server-cert.pem
+      --ssl-key=/etc/mysql/certs/server-key.pem
 volumes:
   db_data:
